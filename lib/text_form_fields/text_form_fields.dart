@@ -16,9 +16,12 @@ class AppTextFormField extends StatelessWidget {
   final int? maxLines;
   final int? minLines;
   final int? maxLength;
+  final InputBorder? border;
   final bool? obscureText;
   final String? placeHolder;
   String? errorText;
+  BoxConstraints? suffixIconConstraints;
+  Widget? suffixIcon;
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final TextInputType? textInputType;
@@ -29,6 +32,8 @@ class AppTextFormField extends StatelessWidget {
       required this.controller,
       this.validator,
       this.onChanged,
+      this.border,
+      this.suffixIconConstraints,
       this.maxLines,
       this.obscureText,
       this.maxLength,
@@ -36,6 +41,7 @@ class AppTextFormField extends StatelessWidget {
       this.errorText,
       this.placeHolder,
       this.hint,
+      this.suffixIcon,
       required this.header,
       this.textInputType,
       this.inputFormatters});
@@ -47,7 +53,7 @@ class AppTextFormField extends StatelessWidget {
       controller: controller,
       validator: validator,
       onChanged: onChanged,
-      style: TextStyle(fontSize: 20.sp, color: AppColors.black),
+      style: TextStyle(fontSize: 20.sp, color: AppColors.white),
       inputFormatters: inputFormatters,
       keyboardType: textInputType,
       smartDashesType: SmartDashesType.enabled,
@@ -57,7 +63,13 @@ class AppTextFormField extends StatelessWidget {
       maxLength: maxLength,
       decoration: InputDecoration(
         counterText: "",
+        suffixIcon: suffixIcon,
+        suffixIconConstraints: suffixIconConstraints,
         labelText: header,
+        border: border,
+        enabledBorder: border,
+        focusedErrorBorder: border,
+        focusedBorder: border,
         hintText: hint,
         errorText: (errorText ?? "").isEmpty ? null : errorText,
       ),
@@ -105,7 +117,7 @@ class AppTextFormFieldPassword extends StatelessWidget {
           errorText = "";
           value.replaceAll(" ", "");
         },
-        style: TextStyle(fontSize: 20.sp, color: AppColors.black),
+        style: TextStyle(fontSize: 20.sp, color: AppColors.white),
         inputFormatters: inputFormatters,
         keyboardType: textInputType,
         smartDashesType: SmartDashesType.enabled,
@@ -293,6 +305,7 @@ class AppDropDownFormField<T> extends StatelessWidget {
   final String? errorText;
   final bool? validationNeeded;
   final double? width;
+  final InputBorder? border;
   final bool? readOnly;
   final String? Function(T) label;
   final T? value;
@@ -308,6 +321,7 @@ class AppDropDownFormField<T> extends StatelessWidget {
       required this.itemList,
       this.errorText,
       this.width,
+      this.border,
       this.readOnly,
       this.placeHolder,
       required this.label,
@@ -322,17 +336,22 @@ class AppDropDownFormField<T> extends StatelessWidget {
         validator: validator,
         itemHeight: null,
         isExpanded: true,
-        style: TextStyle(fontSize: 20.sp, color: AppColors.black),
+        dropdownColor: AppColors.black32,
+        style: TextStyle(fontSize: 20.sp, color: AppColors.white),
         decoration: InputDecoration(
           counterText: "",
           labelText: header,
+          border: border,
+          enabledBorder: border,
+          focusedErrorBorder: border,
+          focusedBorder: border,
         ),
         items: itemList
             .map((e) => DropdownMenuItem(
                   value: e,
                   child: Text(
                     label(e) ?? "",
-                    style: TextStyle(fontSize: 20.sp, color: AppColors.black),
+                    style: TextStyle(fontSize: 20.sp, color: AppColors.white),
                   ),
                 ))
             .toList(),

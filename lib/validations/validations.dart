@@ -1,9 +1,30 @@
-
 class Validators {
   //check is the given string is empty or not
-  static String? isEmpty(String value, String? errorText) {
-    if (value.isEmpty) {
+  static String? isEmpty({required String? value, String? errorText}) {
+    if ((value ?? "").isEmpty) {
       return errorText ?? "This field is required";
+    } else {
+      return null;
+    }
+  }
+
+  //check is the given string is card number or not
+  static String? cardNumber({String? value, String? errorText}) {
+    if ((value ?? "").isEmpty) {
+      return errorText ?? "This field is required";
+    } else if ((value ?? "").length != 19) {
+      return "Please enter a valid card number";
+    } else {
+      return null;
+    }
+  }
+
+  //check is the given string is CVV number or not
+  static String? cvv({String? value, String? errorText}) {
+    if ((value ?? "").isEmpty) {
+      return errorText ?? "This field is required";
+    } else if ((value ?? "").length != 3) {
+      return "Please enter a CVV";
     } else {
       return null;
     }
@@ -21,7 +42,8 @@ class Validators {
       return null;
     }
   }
-   //check is the given 2 string are same
+
+  //check is the given 2 string are same
   static String? isSameAs(
       {required String? value,
       required String? confirmText,
@@ -34,6 +56,7 @@ class Validators {
       return null;
     }
   }
+
   //check is the given string is ,mobile or not
   static String? isMobile(String value, int minLength, int maxLength) {
     if (value.isEmpty) {
@@ -68,5 +91,3 @@ class Validators {
     return null;
   }
 }
-
-

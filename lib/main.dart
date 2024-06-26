@@ -28,6 +28,12 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 dividerTheme: DividerThemeData(color: AppColors.black32),
                 appBarTheme: AppThemes.appBarTheme,
+                dropdownMenuTheme: DropdownMenuThemeData(
+                    menuStyle: MenuStyle(
+                        surfaceTintColor:
+                            WidgetStateProperty.all(AppColors.black32)),
+                    inputDecorationTheme:
+                        InputDecorationTheme(focusColor: AppColors.black32)),
                 inputDecorationTheme: AppThemes.inputDecorationTheme,
                 cardTheme: CardTheme(
                     surfaceTintColor: AppColors.black32,

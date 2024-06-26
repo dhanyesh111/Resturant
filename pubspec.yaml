@@ -19,7 +19,12 @@ dependencies:
   intl:
   flutter_svg:
   get_storage: 2.1.1
-  cached_network_image: 
+  cached_network_image:
+  google_maps_flutter: ^2.7.0
+  geolocator: ^12.0.0
+  firebase_core: 
+  firebase_storage:
+  flutter_polyline_points:
 
 
 
@@ -36,5 +41,6 @@ flutter:
   assets:
      - assets/images/
      - assets/icons/
+     - assets/map_theme/mapTheme.json
 
   
