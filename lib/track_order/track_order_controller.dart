@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/services.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -40,18 +39,18 @@ class TrackOrderController extends GetxController {
     // destinationLongitude = currentLocation.longitude;
     // destinationLatitude = currentLocation.latitude;
 
-    points.addAll(await getPolyLines(
-        startLocation:
-            LatLng(driverLatitude.value ?? 0, driverLongitude.value ?? 0),
-        endLocation:
-            LatLng(restaurantLatitude ?? 0, restaurantLongitude ?? 0)));
-    points.addAll(await getPolyLines(
-        startLocation:
-            LatLng(restaurantLatitude ?? 0, restaurantLongitude ?? 0),
-        endLocation:
-            LatLng(destinationLatitude ?? 0, destinationLongitude ?? 0)));
-    response = await rootBundle.loadString('assets/map_theme/mapTheme.json');
-    isLoading.value = false;
+    // points.addAll(await getPolyLines(
+    //     startLocation:
+    //         LatLng(driverLatitude.value ?? 0, driverLongitude.value ?? 0),
+    //     endLocation:
+    //         LatLng(restaurantLatitude ?? 0, restaurantLongitude ?? 0)));
+    // points.addAll(await getPolyLines(
+    //     startLocation:
+    //         LatLng(restaurantLatitude ?? 0, restaurantLongitude ?? 0),
+    //     endLocation:
+    //         LatLng(destinationLatitude ?? 0, destinationLongitude ?? 0)));
+    // response = await rootBundle.loadString('assets/map_theme/mapTheme.json');
+    // isLoading.value = false;
   }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
@@ -76,19 +75,4 @@ class TrackOrderController extends GetxController {
   Rx<double?> driverLongitude = Rx<double?>(null);
   RxList<LatLng> points = <LatLng>[].obs;
   GoogleMapController? googleMapController;
-
-  Future<Iterable<LatLng>> getPolyLines({
-    required LatLng startLocation,
-    required LatLng endLocation,
-  }) async {
-    PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyCVABxXIQXAwUax1Y-6RilICoA4KsuEvlM",
-      PointLatLng(startLocation.latitude, startLocation.longitude),
-      PointLatLng(endLocation.latitude, endLocation.longitude),
-    );
-    print(result.status);
-    return result.points
-        .map((point) => LatLng(point.latitude, point.longitude));
-  }
 }
